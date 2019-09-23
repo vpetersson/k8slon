@@ -25,19 +25,17 @@ def grant_client_access(headers):
     Verifies and grants client access if it is is present in the whitelist.
     """
 
-    for h in headers:
-        print('Header: {}'.format(h))
+    client_cert = headers.get('Ssl-Client-Subject-Dn')
 
     whitelist = generate_whitelist()
     print('Device whitelist: {}'.format(whitelist))
 
-
-    print('Got request from: {}'.format(headers.get('Ssl-Client')))
+    print('Got request from: {}'.format(client_cert))
 
     # Extract the Common Name from the certificate
     matchObj = re.match(
         r'.*CN=(.*.d.wott.local)',
-        headers.get('Ssl-Client'),
+        client_cert,
         re.M | re.I
     )
 
