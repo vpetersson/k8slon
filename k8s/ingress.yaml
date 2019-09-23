@@ -5,7 +5,13 @@ metadata:
   namespace: k8slon
   annotations:
     ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/issuer: "letsencrypt-prod"
 spec:
+  tls:
+  - hosts:
+    - k8slon.vpetersson.com
+    secretName: k8slon-tls
   rules:
   - host: k8slon.vpetersson.com
     http:
