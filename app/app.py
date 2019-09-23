@@ -13,15 +13,17 @@ def generate_whitelist():
     return whitelist
 
 
+def is_was_client_cerify_ok(headers):
+    """
+    Verifies that client certificate verification passed.
+    """
+    return headers.get('Ssl-Client-Verify') == 'SUCCESS'
+
+
 def grant_client_access(headers):
     """
-    We need to check for:
-     * 'Ssl-Client-Verify' = 'SUCCESS'
-     * 'Ssl-Client' = 'CN=x.d.wott.local,O=Web of Trusted Things\\, Ltd,ST=London,C=UK')
+    Verifies and grants client access if it is is present in the whitelist.
     """
-
-    if not headers.get('Ssl-Client-Verify') == 'SUCCESS':
-        return False
 
     whitelist = generate_whitelist()
     print('Device whitelist: {}'.format(whitelist))
@@ -45,6 +47,10 @@ def grant_client_access(headers):
 
 @app.route('/')
 def hello_world():
+
+    if not is_was_client_cerify_ok(request.headers):
+        return 'No client certificate provided. Access denied.'
+
     if grant_client_access(request.headers):
         return 'Access granted!\n'
     else:
