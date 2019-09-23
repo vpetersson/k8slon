@@ -53,7 +53,7 @@ def grant_client_access(headers):
 def hello_world():
 
     if not is_was_client_cerify_ok(request.headers):
-        return 'No client certificate provided. Access denied.'
+        return 'No client certificate provided. Access denied.\n'
 
     if grant_client_access(request.headers):
         return 'Access granted!\n'
