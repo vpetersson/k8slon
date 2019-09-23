@@ -28,6 +28,8 @@ def grant_client_access(headers):
     whitelist = generate_whitelist()
     print('Device whitelist: {}'.format(whitelist))
 
+    print('Got request from: {}'.format(headers.get('Ssl-Client')))
+
     # Extract the Common Name from the certificate
     matchObj = re.match(
         r'.*CN=(.*.d.wott.local)',
