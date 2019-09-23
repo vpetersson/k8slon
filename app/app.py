@@ -25,8 +25,12 @@ def grant_client_access(headers):
     Verifies and grants client access if it is is present in the whitelist.
     """
 
+    for h in headers:
+        print('Header: {}'.format(h))
+
     whitelist = generate_whitelist()
     print('Device whitelist: {}'.format(whitelist))
+
 
     print('Got request from: {}'.format(headers.get('Ssl-Client')))
 
