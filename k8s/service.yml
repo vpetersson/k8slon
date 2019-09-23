@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8slon-service
+  namespace: k8slon
+spec:
+  selector:
+    app: k8slon
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

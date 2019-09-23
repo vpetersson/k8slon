@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8slon-ing
+  namespace: k8slon
+  labels:
+    app: k8slon
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: "k8slon.vpetersson.com"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: k8slon
+              servicePort: 80
