@@ -50,7 +50,7 @@ def grant_client_access(headers):
 
 
 @app.route('/')
-def hello_world():
+def mtls_example():
 
     if not was_client_certification_verification_ok(request.headers):
         return 'No client certificate provided. Access denied.\n'
