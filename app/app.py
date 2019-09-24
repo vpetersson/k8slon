@@ -13,7 +13,7 @@ def generate_whitelist():
     return whitelist
 
 
-def is_was_client_cerify_ok(headers):
+def was_client_certification_verification_ok(headers):
     """
     Verifies that client certificate verification passed.
     """
@@ -52,7 +52,7 @@ def grant_client_access(headers):
 @app.route('/')
 def hello_world():
 
-    if not is_was_client_cerify_ok(request.headers):
+    if not was_client_certification_verification_ok(request.headers):
         return 'No client certificate provided. Access denied.\n'
 
     if grant_client_access(request.headers):
